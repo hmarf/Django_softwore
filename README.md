@@ -91,6 +91,7 @@ $ ...
 DB の準備ができる前に Django から DB へアクセスがあると、エラーで動かなくなってしまうのを防いでいます。
 docker-compose.yml の `depends_on` の記述によって、DB -> Django の順に起動はしてくれるのですが、DB の準備が整うまでは待ってくれないので、環境によってこれがないとうまく動かないことがあります。というか自分はほぼ毎回そうなります。なんとかもうちょっと綺麗に解決したい。 -->
 
+
 ## Reference:
 docker file: https://github.com/kyon-bll/Django-on-Docker
 login & sign up : https://wsvincent.com/django-user-authentication-tutorial-signup/
