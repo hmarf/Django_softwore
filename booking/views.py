@@ -17,6 +17,8 @@ from .forms import BooksForm
 from .models import Hotel, Booking
 from django.utils import timezone
 
+from datetime import datetime as dt
+
 # Create your views here.
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
@@ -61,16 +63,31 @@ def searchHotel(request):
                 city=request.POST['city'],
                 room_type=request.POST['room_type']
                 )
-            time = request.POST['time']
-            time = time + ' 0:0:0'
-            print(time)
-            booking = Booking(user_id=User(id=request.user.id),hotel_id=Hotel(id=hotel_data.id))
+            time_str = request.POST['time']
+            time_str = time_str + ' 0:0:0'
+            time_datatime = dt.strptime(time_str,'%Y-%m-%d %H:%M:%S')
+            print(time_datatime)
+            booking = Booking(user_id=User(id=request.user.id),
+                            hotel_id=Hotel(id=hotel_data.id),
+                            time_data=time_datatime)
             booking.save()
         else:
             print('not ok')
     else:  # ← methodが'POST'ではない = 最初のページ表示時の処理
         print('error')
     return HttpResponseRedirect('/')
+
+def confirm_booking(request):
+    booking_user_data = []
+    booking_data = Booking.objects.all().filter(user_id=User(id=request.user.id))
+    for booking in booking_data:
+        hotel_data = Hotel.objects.all().filter(id=booking.hotel_id_id).values()
+        booking_user_data.append([hotel_data,booking.time_data])
+    print(booking_user_data)
+    d = {
+        'bookingDatas': booking_user_data,
+    }
+    return render(request, 'confirm.html',d)
 
 def create_query(request):
     hotelName = ['hotel_A','hotel_B','hotel_C','hotel_D','hotel_E']
