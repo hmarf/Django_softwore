@@ -97,3 +97,7 @@ def create_query(request):
                 a = Hotel(hotel_name=hotel,city=city,room_type=room)
                 a.save()
     return HttpResponseRedirect('/admin')
+
+def delete_query(request):
+    Hotel.objects.all().delete()
+    return HttpResponseRedirect('/admin')
