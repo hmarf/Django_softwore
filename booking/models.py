@@ -12,3 +12,4 @@ class Booking(models.Model):
     user_id = models.ForeignKey(User,on_delete=models.CASCADE)
     hotel_id = models.ForeignKey(Hotel,on_delete=models.CASCADE, null=True)
     time_data = models.DateTimeField(null=True)
+    

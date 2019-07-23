@@ -23,5 +23,7 @@ urlpatterns = [
     path('booking/', include('booking.urls')),
     path('booking/', include('django.contrib.auth.urls')),
     path('', booking.home),
+    path('search_hotel', booking.searchHotel),
+    path('create_query', booking.create_query),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ]
