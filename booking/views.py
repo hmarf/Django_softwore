@@ -74,7 +74,7 @@ def searchHotel(request):
             print('not ok')
     else:  # ← methodが'POST'ではない = 最初のページ表示時の処理
         print('error')
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/confirm_booking')
 
 def confirm_booking(request):
     booking_user_data = []
