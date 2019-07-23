@@ -66,7 +66,6 @@ def searchHotel(request):
             time_str = request.POST['time']
             time_str = time_str + ' 0:0:0'
             time_datatime = dt.strptime(time_str,'%Y-%m-%d %H:%M:%S')
-            print(time_datatime)
             booking = Booking(user_id=User(id=request.user.id),
                             hotel_id=Hotel(id=hotel_data.id),
                             time_data=time_datatime)
@@ -83,7 +82,6 @@ def confirm_booking(request):
     for booking in booking_data:
         hotel_data = Hotel.objects.all().filter(id=booking.hotel_id_id).values()
         booking_user_data.append([hotel_data,booking.time_data])
-    print(booking_user_data)
     d = {
         'bookingDatas': booking_user_data,
     }

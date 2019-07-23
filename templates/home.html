@@ -12,7 +12,8 @@
     <input type="date" name="time" required></input>
     <input type="submit" value="送信"/>
   </form>
-  <p><a href="{% url 'logout' %}">logout</a></p>
+  <a href="/confirm_booking">予約確認画面へ</a>
+  <a href="{% url 'logout' %}">logout</a>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
