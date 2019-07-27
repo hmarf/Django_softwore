@@ -56,6 +56,46 @@ def home(request):
 
 def searchHotel(request):
     if request.method == "POST":
+        form = BooksForm(data=request.POST)
+        #if form.is_valid():  # ← 受け取ったデータの正当性確認
+        city=request.POST['city']
+        time_str = request.POST['time']
+        time_str = time_str + ' 0:0:0'
+        time_datatime = dt.strptime(time_str,'%Y-%m-%d %H:%M:%S')
+        hotel_data = Hotel.objects.filter(city=city)
+        hotel_data_id = hotel_data.values('id')
+        booking_data = Booking.objects.filter(time_data=time_datatime)
+        booking_data_id = booking_data.values('hotel_id')
+        for _id in booking_data_id:
+            hotel_data.exclude(id=_id["hotel_id"])
+        _hotel_data = hotel_data.values()
+        print(_hotel_data)
+        time = time_str
+        d = {
+            'city': city,
+            'time': request.POST['time'],
+            'bookingDatas': _hotel_data,
+        }
+        return render(request, 'search_hotel.html',d)
+    else:
+        return HttpResponseRedirect('/')
+
+def bookingHotel(request):
+    if request.method == "POST":
+        time_str = request.POST['time']
+        time_str = time_str + ' 0:0:0'
+        time_datatime = dt.strptime(time_str,'%Y-%m-%d %H:%M:%S')
+        _hotel_id = request.POST['hotel_data']
+        print(_hotel_id)
+        booking = Booking(user_id=User(id=request.user.id),
+                        hotel_id=Hotel(id=_hotel_id),
+                        time_data=time_datatime)
+        booking.save()
+        return HttpResponseRedirect('/confirm_booking')
+    else:
+        return HttpResponseRedirect('/confirm_booking')
+""" def searchHotel(request):
+    if request.method == "POST":
         form = BooksForm(data=request.POST)  # ← 受け取ったPOSTデータを渡す
         if form.is_valid():  # ← 受け取ったデータの正当性確認
             hotel_data = Hotel.objects.get(
@@ -74,7 +114,7 @@ def searchHotel(request):
             print('not ok')
     else:  # ← methodが'POST'ではない = 最初のページ表示時の処理
         print('error')
-    return HttpResponseRedirect('/confirm_booking')
+    return HttpResponseRedirect('/confirm_booking') """
 
 def confirm_booking(request):
     booking_user_data = []
