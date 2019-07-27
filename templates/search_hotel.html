@@ -1,0 +1,63 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{{ city }} で {{ time }} 予約できるホテル一覧
+<!-- <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+    <tr>
+        <th bgcolor="#EE0000"><font color="#FFFFFF">Booking Hotel</font></th>
+        <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">City</font></th>
+        <th bgcolor="#EE0000" width="200"><font color="#FFFFFF">Hotel Name</font></th>
+        <th bgcolor="#EE0000" width="200"><font color="#FFFFFF">Room Type</font></th>
+        <th bgcolor="#EE0000" width="800"><font color="#FFFFFF">Booking Data</font></th>
+    </tr> -->
+    <form action="/booking_hotel" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="city" value={{ city }} >
+        <input type="hidden" name="time" value={{ time }} >
+        <select name="hotel_data" size="12">
+        {% for data in bookingDatas %}
+            <option value={{data.id}}>ホテル名：{{ data.hotel_name }}    部屋のタイプ：{{ data.room_type }}</option>
+        {% endfor %}
+        </select>
+        <hr>
+        <input type="submit" value="submit" class="button"/>
+    </form>
+
+    <a href="/confirm_booking">予約確認画面へ</a>
+    <br> 
+    <a href="{% url 'logout' %}">logout</a>
+
+
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+    <a href="/booking/signup">signup</a>
+
+{% endif %}
+
+<style type="text/css">
+  .button {
+    display       : inline-block;
+    margin-bottom: 30px;
+    border-radius : 5%;          /* 角丸       */
+    font-size     : 9pt;        /* 文字サイズ */
+    text-align    : center;      /* 文字位置   */
+    cursor        : pointer;     /* カーソル   */
+    padding       : 12px 12px;   /* 余白       */
+    background    : #000066;     /* 背景色     */
+    color         : #ffffff;     /* 文字色     */
+    line-height   : 1em;         /* 1行の高さ  */
+    transition    : .3s;         /* なめらか変化 */
+    box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
+    border        : 2px solid #000066;    /* 枠の指定 */
+  }
+  .button:hover {
+    box-shadow    : none;        /* カーソル時の影消去 */
+    color         : #000066;     /* 背景色     */
+    background    : #ffffff;     /* 文字色     */
+  }
+  </style>
+{% endblock %}

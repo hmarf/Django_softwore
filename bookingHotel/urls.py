@@ -25,6 +25,7 @@ urlpatterns = [
     path('', booking.home),
     path('confirm_booking', booking.confirm_booking),
     path('search_hotel', booking.searchHotel),
+    path('booking_hotel', booking.bookingHotel),
     path('create_query', booking.create_query),
     path('delete_query', booking.delete_query),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),

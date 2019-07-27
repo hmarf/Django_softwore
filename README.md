@@ -1,4 +1,7 @@
 # Django-on-Docker
+
+大学の課題で作成したもの
+
 ## How to do
 ```
 docker-compose up -d
