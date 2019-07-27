@@ -128,13 +128,14 @@ def confirm_booking(request):
     return render(request, 'confirm.html',d)
 
 def create_query(request):
-    hotelName = ['hotel_A','hotel_B','hotel_C','hotel_D','hotel_E']
+    hotelNames = ['A','B','C','D','E']
     cities = ['Tokyo','Kyoto','Sendai','Fukuoka']
     room_type = ['standard','double','deluxe']
     for city in cities:
-        for hotel in hotelName:
+        for hotelname in hotelNames:
             for room in room_type:
-                a = Hotel(hotel_name=hotel,city=city,room_type=room)
+                _name = city + '_' + hotelname
+                a = Hotel(hotel_name=_name,city=city,room_type=room)
                 a.save()
     return HttpResponseRedirect('/admin')
 

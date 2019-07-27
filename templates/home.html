@@ -4,8 +4,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<h1 style="color: #ff0000;">This page is Booking Hotel</h1>
 {% if user.is_authenticated %}
-  <h1 style="color: #ff0000;">This page is Booking Hotel</h1>
   <h2>You are {{ user.username }}.</h2>
 
   <form action="/search_hotel" method="POST">
@@ -40,8 +40,9 @@
   <br> 
   <a href="{% url 'logout' %}">logout</a>
 {% else %}
-  <p>You are not logged in</p>
+  <h2>You need to login.</h2>
   <a href="{% url 'login' %}">login</a>
+  <br>
   <a href="/booking/signup">signup</a>
 {% endif %}
 <style type="text/css">
