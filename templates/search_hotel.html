@@ -5,7 +5,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-{{ city }} で {{ time }} 予約できるホテル一覧
+{{ city }} で {{ time }} List of available hotels
 <!-- <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
     <tr>
         <th bgcolor="#EE0000"><font color="#FFFFFF">Booking Hotel</font></th>
@@ -20,7 +20,7 @@
         <input type="hidden" name="time" value={{ time }} >
         <select name="hotel_data" size="12">
         {% for data in bookingDatas %}
-            <option value={{data.id}}>ホテル名：{{ data.hotel_name }}    部屋のタイプ：{{ data.room_type }}</option>
+            <option value={{data.id}}>Hotel Name: {{ data.hotel_name }},     Room Type: {{ data.room_type }}</option>
         {% endfor %}
         </select>
         <hr>

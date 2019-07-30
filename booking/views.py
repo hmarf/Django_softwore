@@ -127,7 +127,7 @@ def confirm_booking(request):
     }
     return render(request, 'confirm.html',d)
 
-def create_query(request):
+def create_query(request): # '/create_query' create hotel table automatically'
     hotelNames = ['A','B','C','D','E']
     cities = ['Tokyo','Kyoto','Sendai','Fukuoka']
     room_type = ['standard','double','deluxe']
@@ -139,6 +139,6 @@ def create_query(request):
                 a.save()
     return HttpResponseRedirect('/admin')
 
-def delete_query(request):
+def delete_query(request): # # '/delete_query' delete hotel table automatically'
     Hotel.objects.all().delete()
     return HttpResponseRedirect('/admin')

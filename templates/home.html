@@ -12,11 +12,11 @@
     {% csrf_token %}
     <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
       <tr>
-        <th>項目</th>
-        <th>入力値</th>
+        <th>item</th>
+        <th>input value</th>
       </tr>
       <tr>
-        <td>街を選択</td>
+        <td>Select city</td>
         <td> {{ form.city }} </td>
       </tr>
       <!-- <tr>
@@ -28,7 +28,7 @@
         <td> {{ form.room_type }} </td>
       </tr>
       <tr> -->
-        <td>予約する日を選択</td>
+        <td>Select a day to make a booking</td>
         <td><input type="date" name="time" required></input></td>
       </tr>
     </table>
@@ -36,7 +36,7 @@
     <br> 
     <input type="submit" value="submit" class="button"/>
   </form>
-  <a href="/confirm_booking">予約確認画面へ</a>
+  <a href="/confirm_booking">Booking confirmation screen</a>
   <br> 
   <a href="{% url 'logout' %}">logout</a>
 {% else %}
