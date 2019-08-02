@@ -127,7 +127,7 @@ def confirm_booking(request):
     }
     return render(request, 'confirm.html',d)
 
-def create_query(request): # '/create_query' create hotel table automatically'
+def create_query(request): # '/create_query' create hotel table automatically
     hotelNames = ['A','B','C','D','E']
     cities = ['Tokyo','Kyoto','Sendai','Fukuoka']
     room_type = ['standard','double','deluxe']
